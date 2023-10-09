@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Paso para clonar el repositorio de código fuente
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                // Paso para compilar tu proyecto Java (por ejemplo, usando Maven)
+                bat 'mvn clean package'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Paso para ejecutar pruebas
+                bat 'mvn test'
+            }
+        }
+        stage('Deploy') {
+            steps {
+                // Paso para implementar la aplicación (puedes personalizar esto según tu proyecto)
+                sh './deploy.sh'
+            }
+        }
+    }
+
+    post {
+        success {
+            // Acciones a realizar si el pipeline tiene éxito
+            echo 'El pipeline se ejecutó exitosamente'
+        }
+        failure {
+            // Acciones a realizar si el pipeline falla
+            echo 'El pipeline falló'
+        }
+    }
+}
