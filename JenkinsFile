@@ -23,7 +23,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 // Paso para implementar la aplicación (puedes personalizar esto según tu proyecto)
-                sh './deploy.sh'
+                echo 'Deploy'
             }
         }
     }
